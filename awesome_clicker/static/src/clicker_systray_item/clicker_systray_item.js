@@ -8,15 +8,15 @@ export class ClickerSystray extends Component {
     static template = "awesome_clicker.ClickerSystray";
 
     setup() {
-        this.state = useState({counter: 0});
         this.action = useService("action");
+        this.clickService = useState(useService("awesome_clicker.clicker_service"));
         useExternalListener(document.body, "click", () => {
-            this.state.counter++;
+            this.clickService.increment(1);
         }, true);
     }
 
     increment() {
-        this.state.counter += 9;
+        this.clickService.increment(9);
     }
 
     openClientAction() {
